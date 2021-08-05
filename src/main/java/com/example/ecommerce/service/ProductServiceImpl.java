@@ -1,20 +1,33 @@
 package com.example.ecommerce.service;
 
 import com.example.ecommerce.model.Product;
+import com.example.ecommerce.repository.ProductRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+
+@Service
+@Transactional
 public class ProductServiceImpl implements ProductService {
+
+    private ProductRepository productRepository;
+
+    public ProductServiceImpl(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
+
     @Override
     public Iterable<Product> getAllProducts() {
-        return null;
+        return productRepository.findAll();
     }
 
     @Override
     public Product getProduct(long id) {
-        return null;
+        return productRepository.findById(id).orElseThrow();
     }
 
     @Override
     public Product save(Product product) {
-        return null;
+        return productRepository.save(product);
     }
 }
